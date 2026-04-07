@@ -368,39 +368,38 @@ resource "aws_ecs_task_definition" "app" {
 ############################
 # ECS Service
 ############################
-# resource "aws_ecs_service" "tracespec_app" {
-#   name            = "tracespec-service"
-#   cluster         = aws_ecs_cluster.main.id
-#   task_definition = aws_ecs_task_definition.app.arn
-#   desired_count   = 2
-#   launch_type     = "FARGATE"
+resource "aws_ecs_service" "tracespec_app" {
+  name            = "tracespec-service"
+  cluster         = aws_ecs_cluster.main.id
+  task_definition = aws_ecs_task_definition.app.arn
+  desired_count   = 2
+  launch_type     = "FARGATE"
 
-#   network_configuration {
-#     subnets = [
-#       aws_subnet.private_1.id,
-#       aws_subnet.private_2.id
-#     ]
+  network_configuration {
+    subnets = [
+      aws_subnet.private_1.id,
+      aws_subnet.private_2.id
+    ]
 
-#     security_groups = [
-#       aws_security_group.ecs_sg.id
-#     ]
+    security_groups = [
+      aws_security_group.ecs_sg.id
+    ]
 
-#     assign_public_ip = false # 外から直接アクセス不可（private）= ECSは外に出さない
-#   }
+    assign_public_ip = false # 外から直接アクセス不可（private）= ECSは外に出さない
+  }
 
-#   load_balancer {
-#     target_group_arn = aws_lb_target_group.main.arn # select target group
-#     container_name   = "tracespec-container"
-#     container_port   = 3000
-#   }
+  load_balancer {
+    target_group_arn = aws_lb_target_group.main.arn # select target group
+    container_name   = "tracespec-container"
+    container_port   = 3000
+  }
 
-#   depends_on = [
-#     aws_lb_listener.http
-#   ]
+  depends_on = [
+    aws_lb_listener.http
+  ]
 
-#   tags = {
-#     Name = "tracespec-service"
-#   }
-# }
+  tags = {
+    Name = "tracespec-service"
+  }
+}
 
-# change
