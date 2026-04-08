@@ -1,6 +1,6 @@
-terraform {
+terraform { # s3は予め手動で作成しておく
   backend "s3" {
-    bucket = "tracespec_infra_state"
+    bucket = "terraform-state-489909409804-ap-northeast-1-an "
     key    = "terraform/terraform.tfstate"
     region = "ap-northeast-1"
   }
