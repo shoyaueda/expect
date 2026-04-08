@@ -1,3 +1,11 @@
+terraform {
+  backend "s3" {
+    bucket = "tracespec_infra_state"
+    key    = "terraform/terraform.tfstate"
+    region = "ap-northeast-1"
+  }
+}
+
 provider "aws" {
   region = "ap-northeast-1"
 }
