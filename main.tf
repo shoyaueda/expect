@@ -410,4 +410,3 @@ resource "aws_ecs_service" "tracespec_app" {
     Name = "tracespec-service"
   }
 }
-
